@@ -11,11 +11,11 @@ summary: |
 
   This Genesys Cloud Developer Blueprint explains how to set up Genesys Cloud and Microsoft Azure Active Directory to update a Genesys Cloud agent's presence in Microsoft Teams upon a Genesys Cloud user presence update.
 
-  When an Architect workflow receives an inbound interaction, a Microsoft Graph API call is sent to the Microsoft Teams user that is associated with the Genesys Cloud agent who is assigned to the interaction. The Microsoft Teams user's presence is set to the MS Teams presence value that corresponds to the GC User presence value sent to the Architect workflow.
+  When an Architect workflow receives an inbound user presence change, a Microsoft Graph API call is sent to the Microsoft Teams user that is associated with the Genesys Cloud agent who is assigned to the interaction. The Microsoft Teams user's presence is set to the MS Teams presence value that corresponds to the GC User presence value sent to the Architect workflow.
 
-The following illustration shows this solution from an agent’s point of view.
+The following illustration shows this solution from the Genesys Cloud user’s point of view.
 
-![Microsoft Teams presence update from an agent's point of view](images/msteams-presence-workflow.png "Microsoft Teams presence update from an agent's point of view")
+![Microsoft Teams presence update from the Genesys Cloud user’s point of view](images/msteams-presence-workflow.png "Microsoft Teams presence update from the Genesys Cloud user’s point of view")
 
 The following shows the end-to-end agent experience that this solution enables.
 
@@ -244,7 +244,7 @@ The Find the Teams User ID data action uses the authenticated token that is supp
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the Find-Teams-User-Id.custom.json file and associate it with the web services data action that you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section, and then click **Import Action**.
+3. Select the Find-Teams-User-Id-Multiple-externalIds.custom.json file and associate it with the web services data action that you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section, and then click **Import Action**.
 
    ![Import the Find Teams User ID data action](images/4BImportFindTeamsUserIdDataAction.png "Import the Find Teams User ID data action")
 
