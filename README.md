@@ -8,7 +8,7 @@ When an Architect workflow receives an inbound user presence change, a Microsoft
 
 The following shows the end-to-end agent experience that this solution enables.
 
-![End-to-end agent experience](blueprint/images/MSTeamsGCPresenceSyncBlueprint.gif "End-to-end agent experience")
+![End-to-end agent experience](blueprint/images/GCtoMSTeamsPresenceUpdatesbasedonGCPresenceChanges.gif "End-to-end agent experience")
 
 To trigger Microsoft Teams presence updates from Genesys Cloud, you use several public APIs that are available from Genesys Cloud and Microsoft Graph. The following illustration shows the API calls between Genesys Cloud and Microsoft 365.
 
