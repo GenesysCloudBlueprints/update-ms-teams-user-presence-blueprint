@@ -15,7 +15,7 @@ summary: |
 
 The following illustration shows this solution from an agent’s point of view.
 
-![Microsoft Teams presence update from an agent's point of view](images/msteams-workflow.png "Microsoft Teams presence update from an agent's point of view")
+![Microsoft Teams presence update from an agent's point of view](images/msteams-presence-workflow.png "Microsoft Teams presence update from an agent's point of view")
 
 The following shows the end-to-end agent experience that this solution enables.
 
