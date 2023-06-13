@@ -1,0 +1,54 @@
+{
+  "name": "Find Teams User Id (Multiple externalIds)",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/scim/users/${input.USER_ID}?attributes=urn%3Aietf%3Aparams%3Ascim%3Aschemas%3Aextension%3Agenesys%3Apurecloud%3A2.0%3AUser%3AexternalIds",
+      "requestType": "GET",
+      "headers": {},
+      "requestTemplate": "${input.rawRequest}"
+    },
+    "response": {
+      "translationMap": {
+        "MsTeamsUserId": "$.['urn:ietf:params:scim:schemas:extension:genesys:purecloud:2.0:User']['externalIds'][?(@.authority=='microsoftteams')].value"
+      },
+      "translationMapDefaults": {
+        "MsTeamsUserId": "Not Found"
+      },
+      "successTemplate": "{\"MsTeamsUserId\": ${MsTeamsUserId}}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "USER_ID"
+        ],
+        "properties": {
+          "USER_ID": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {
+          "MsTeamsUserId": {
+            "type": "array",
+            "items": {
+              "title": "MsTeamsUserId",
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}
