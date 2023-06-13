@@ -1,4 +1,4 @@
-# Update the presence of a Microsoft Teams user based upon a Genesys Cloud user presence update
+# (DRAFT) Update the presence of a Microsoft Teams user based upon a Genesys Cloud user presence update
 
 This Genesys Cloud Developer Blueprint explains how to set up Genesys Cloud and Microsoft Azure Active Directory to update a Genesys Cloud user's presence in Microsoft Teams when a user presence change occurs in Genesys Cloud.
 
