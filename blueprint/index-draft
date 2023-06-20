@@ -6,22 +6,22 @@ icon: blueprint
 image: images/OpenScriptDropdown.png
 category: 6
 summary: |
-  This Genesys Cloud Developer Blueprint explains how to set up Genesys Cloud and Microsoft Azure Active Directory to update a Genesys Cloud agent's presence in Microsoft Teams upon a Genesys Cloud user presence update.
+  This Genesys Cloud Developer Blueprint describes how to setup Genesys Cloud and Microsoft Azure Active Directory. When the presence of a Genesys Cloud user is updated, so is the presence of a Genesys Cloud agent in Microsoft Teams.
 ---
 
-  This Genesys Cloud Developer Blueprint explains how to set up Genesys Cloud and Microsoft Azure Active Directory to update a Genesys Cloud agent's presence in Microsoft Teams upon a Genesys Cloud user presence update.
+ This Genesys Cloud Developer Blueprint describes how to setup Genesys Cloud and Microsoft Azure Active Directory. When the presence of a Genesys Cloud user is updated, so is the presence of a Genesys Cloud agent in Microsoft Teams.
 
-  When an Architect workflow receives an inbound user presence change, a Microsoft Graph API call is sent to the Microsoft Teams user that is associated with the Genesys Cloud agent who is assigned to the interaction. The Microsoft Teams user's presence is set to the MS Teams presence value that corresponds to the GC User presence value sent to the Architect workflow.
+  A Microsoft Graph API call is sent when an Architect workflow receives an inbound user presence change from a Microsoft Teams user associated with the Genesys Cloud agent. The Microsoft Teams user's presence is set to the MS Teams presence value that corresponds to the GC User presence value sent to the Architect workflow.
 
-The following illustration shows this solution from the Genesys Cloud user’s point of view.
+A Genesys Cloud user’s perspective is shown in the following  illustration.
 
 ![Microsoft Teams presence update from the Genesys Cloud user’s point of view](images/msteams-presence-workflow.png "Microsoft Teams presence update from the Genesys Cloud user’s point of view")
 
-The following shows the end-to-end agent experience that this solution enables.
+The following shows the end-to-end agent experience provided by this solution.
 
 ![End-to-end agent experience](images/GCtoMSTeamsPresenceUpdatesbasedonGCPresenceChanges.gif "End-to-end agent experience")
 
-To trigger Microsoft Teams presence updates from Genesys Cloud, you use several public APIs that are available from Genesys Cloud and Microsoft Graph. The following illustration shows the API calls between Genesys Cloud and Microsoft 365.
+Several public APIs are available from Genesys Cloud and Microsoft Graph to trigger Microsoft Teams presence updates. In the following illustration, API calls are shown between Genesys Cloud and Microsoft 365.
 
 ![The API calls between Genesys Cloud and Microsoft 365](images/microsoft-teams-architect.png "The API calls between Genesys Cloud and Microsoft 365")
 
@@ -51,35 +51,35 @@ To trigger Microsoft Teams presence updates from Genesys Cloud, you use several 
 
 ### Microsoft account
 
-* A Microsoft account with an Azure Enterprise Agreement (Azure EA) is required. Individual Azure accounts do not support the OAuth client with the client credentials grant type that is required for this solution.
-* An Azure Active Directory (Azure AD) account with administrator-level permissions to set up authorization and grant permissions for Genesys Cloud
-* Microsoft Teams license for each agent
+* The Azure Enterprise Agreement (Azure EA) requires a Microsoft account.  OAuth client with the client credentials grant type required for this solution are not supported by individual Azure accounts.
+* Genesys Cloud authorization and grant permissions can be set up using an Azure Active Directory (Azure AD) account with administrator-level permissions.
+* Each agent must have a Microsoft Teams license 
 
 ## Configure the Azure custom app
 
-To enable the Genesys Cloud instance to authenticate, read, and write presence information from the Graph API for Microsoft Teams, register your custom app in Azure.
+Register your custom app in Azure to enable Genesys Cloud to authenticate, read, and write presence information from Microsoft Teams Graph API.
 
 1. Log in to the Azure portal.
 2. Navigate to **App registrations** and click **New registration**.
 
    ![Click New registration](images/0ACreateNewAzureAppRegistration.png "Click New registration")
 
-3. Enter a name for the application and select your preferred supported account type. Any account type works for a single Genesys Cloud organization. Click **Register**.
+3. Enter an application name and select your preferred supported account type. There is no limit to the type of account that can be used for a Genesys Cloud organization. Click **Register**.
 
    ![Specify the registration details](images/0BRegisterNewApp.png "Specify the registration details")
 
-4. On the application's Overview page, copy the values in the **Application (client) ID** and **Directory (tenant) ID** fields for later use.
+4. Ensure that you copy the values from the application's Overview page's fields for later use, such as the **Application (client) ID** and **Directory (tenant) ID**.
 
    ![Copy the client and tenant IDs](images/0CNewApp.png "Copy the client and tenant IDs")
 
-5. Click **Certificates & secrets** and then click **New client secret**.
+5. Click **Certificates & secrets** and click **New client secret**.
 
    ![Create the client secret](images/0DCreateClientSecret.png "Create the client secret")
 
-6. Copy the client secret value for later use.
+6. Make a copy of the client secret value so you can use it later.
 
    :::primary
-   **Note:** You cannot view or retrieve the client secret value later.
+   **Note:** Client secret values cannot be viewed or retrieve later.
    :::
 
    ![Copy and save the client secrets](images/0ECopyClientSecret.png "Copy and save the client secrets")
@@ -116,9 +116,9 @@ To enable the Genesys Cloud instance to authenticate, read, and write presence i
 
 ### Add a web services data actions integration
 
-To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Teams, add a web services data actions integration:
+Add a web services data actions integration to Genesys Cloud to communicate with Microsoft Azure and Microsoft Teams:
 
-1. In Genesys Cloud, navigate to **Admin** > **Integrations** and install the **Web Services Data Actions** integration from Genesys Cloud. For more information, see [About the data actions integrations](https://help.mypurecloud.com/?p=209478 "Opens the About data actions integrations article") in the Genesys Cloud Resource Center.
+1. From Genesys Cloud, navigate to **Admin** > **Integrations** and install the **Web Services Data Actions** integration. For more information, see [About the data actions integrations](https://help.mypurecloud.com/?p=209478 "Opens the About data actions integrations article") in the Genesys Cloud Resource Center.
 
    ![Install the Web Services Data Actions integration](images/1AWebServicesDataActionInstall.png "Install the Web Services Data Actions integration")
 
@@ -126,11 +126,11 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
    ![Rename the data action](images/1BRenameWebServicesDataAction.png "Rename the data action")
 
-3. Click **Configuration** > **Credentials** and then click **Configure**.
+3. Click **Configuration** > **Credentials**, then click **Configure**.
 
    ![Click Configure](images/1CConfigurationCredentials.png "Click Configure")
 
-4. From the **Credential Type** list, select **User Defined (OAuth)** and specify the following options:
+4. Select **User Defined (OAuth)** from the **Credential Type** list and specify the following options:
 
   * **client_id** Use the application (client) ID from your Azure custom app.
   * **client_secret** Use the client secret from your Azure custom app.
@@ -146,16 +146,16 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
 ### Import the authentication data action
 
-When you add a web services data actions integration in your organization, Genesys Cloud automatically creates a **Custom Auth** data action. You import this authentication data action into another data action.
+A **Custom Auth** data action is created automatically by Genesys Cloud when you add a web services data actions integration in your organization. This authentication data action can be imported into another data action.
 
 1. Navigate to **Admin** > **Integrations** > **Actions** and open the **Custom Auth** data action.
 
 ![Open the custom auth data action that is associated with the web services data action](images/1FCustomAuthDataAction.png "Open the custom auth data action that is associated with web services data action")
 
-2. Go to the bottom of the Custom Auth data action page. To change the status of the data action from **Published** to **Draft**, click **Viewing**.
+2. Scroll to the bottom of the Custom Auth data action page. Click **Viewing** to change the status of the data action from **Published** to **Draft**.
 
-3. From the [update-ms-teams-user-presence-blueprint](https://github.com/GenesysCloudBlueprints/update-ms-teams-user-presence-blueprint) GitHub repository, download the Office-365-Auth.customAuth.json file.
-4. In Genesys Cloud, click **Import** and browse to select the downloaded file.
+3. Download the Office-365-Auth.customAuth.json file from the [update-ms-teams-user-presence-blueprint](https://github.com/GenesysCloudBlueprints/update-ms-teams-user-presence-blueprint) GitHub repository.
+4. Click **Import** in Genesys Cloud and browse to select the downloaded file.
 
     ![Import the custom authentication data action file](images/1FOpenCustomAuthDataAction.png "Import the custom authentication data action file")
 
@@ -164,11 +164,12 @@ When you add a web services data actions integration in your organization, Genes
   ![Complete the import](images/1GImportCustomAuthDataAction.png "Complete the import")
 
 6. Click **Save & Publish**.
+
   :::primary
-  **Note:** To publish the data action, in the Publish Action page, click **Yes**. The import action modifies only the data action configuration and not the data action contract.
+  **Note:** Click **Yes** on the Publish Action page to publish the data action. Import actions modify only the data action configuration and not their contract.
   :::
 
-7.  Return to the web services data action integration and verify that the data action has the **Active** status.
+7. Verify that the data action has an **Active** status by returning to the web services data action integration.
 
 ### Create a custom role for use with Genesys Cloud OAuth client
 
@@ -176,37 +177,37 @@ When you add a web services data actions integration in your organization, Genes
 
    ![Add a custom role](images/createRole.png "Add a custom role")
 
-2. Type a **Name** for your custom role.
+2. Give your custom role a **Name**.
 
   ![Name the custom role](images/nameCustomRole.png "Name the custom role")
 
 3. Search and select the **processautomation**>**trigger**>**All Permissions** permissions and click **Save** to assign the appropriate permissions to your custom role.
 
 :::primary
-**Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client, as described in the next section.  The **processautomation**>**trigger**>**All Permissions** permissions require event orchestration to be activated in your Genesys Cloud organization.
+**Note:** The Genesys Cloud OAuth client can be created by assigning this role to your user record as described in the next section. Genesys Cloud require event orchestration to process **processautomation**>**trigger**>**All Permissions** permissions.
 :::
 
 ![Add permissions to the custom role](images/assignPermissionToCustomRole.png "Add permissions to the custom role")
 
 ### Create an OAuth client for use with the Genesys Cloud data action integration
 
-To enable a Genesys Cloud data action to make public API requests on behalf of your Genesys Cloud organization, use an OAuth client to configure authentication with Genesys Cloud.
+Genesys Cloud data action can make public API requests on behalf of your Genesys Cloud organization by using an OAuth client to configure authentication.
 
 1. Navigate to **Admin** > **Integrations** > **OAuth** and click **Add Client**.
 
    ![Add an OAuth client](images/2AAddOAuthClient.png "Add an OAuth client")
 
-2. Enter a name for the OAuth client and select **Client Credentials** as the grant type. Click the **Roles** tab and assign the role for the OAuth client.
+2. Enter a name for the OAuth client and select **Client Credentials** as the grant type. Click the **Roles** tab and assign the OAuth client role.
 
      ![Select the custom role and the grant type](images/2BOAuthClientSetup.png "Select the custom role and the grant type")
 
-3. Click **Save**. Copy the client ID and the client secret values for later use.
+3. Click **Save**. For later use, copy the client ID and the client secret values.
 
    ![Copy the client ID and client secret values](images/2COAuthClientCredentials.png "Copy the client ID and client secret values")
 
 ### Add a Genesys Cloud data actions integration
 
-To update a user's presence in Microsoft Teams, get the Microsoft Teams userId that corresponds to the Genesys Cloud agent who will answer the voice interaction. To do this, you call a Genesys Cloud public API. To enable this public API call, add a Genesys Cloud data actions integration.
+To update a user's presence in Microsoft Teams, get the Microsoft Teams userId of the Genesys Cloud agent who answered the call. This is done through Genesys Cloud public API. Genesys Cloud data actions integration is needed to enable this public API call.
 
 1. Navigate to **Admin** > **Integrations** > **Integrations** and install the **Genesys Cloud Data Actions** integration. For more information, see [About the data actions integrations](https://help.mypurecloud.com/?p=209478 "Opens the About the data actions integrations article") in the Genesys Cloud Resource Center.
 
@@ -216,27 +217,28 @@ To update a user's presence in Microsoft Teams, get the Microsoft Teams userId t
 
    ![Rename the data action](images/3BRenameDataAction.png "Rename the data action")
 
-3. On the **Configuration** tab, click **Credentials** and then click **Configure**.
+3. On the **Configuration** tab, click **Credentials**, then click **Configure**.
 
    ![Navigate to the OAuth credentials](images/3CAddOAuthCredentials.png "Navigate to the OAuth credentials")
 
-4. Enter the client ID and client secret of the SCIM OAuth client that you used with the [Active Directory Microsoft Teams SCIM integration](#genesys-cloud-account "Goes to the Genesys Cloud account section"). Click **OK** and save the data action.
+4. Enter the client ID and client secret of the SCIM OAuth client that you used with [Active Directory Microsoft Teams SCIM integration](#genesys-cloud-account "Goes to the Genesys Cloud account section"). Click **OK** and save the data action.
 
    ![Add OAuth client credentials](images/3DOAuthClientIDandSecret.png "Add OAuth client credentials")
 
-5. Navigate to the main Integrations page and set the Get MS Teams User ID data action integration to **Active**.
+5. Navigate to the main Integrations page and set the "Get MS Teams User ID data action integration" to **Active**.
 
    ![Set the Get MS Teams User ID data integration to active](images/3ESetToActive.png "Set the Get MS Teams User ID data action integration to active")
 
 ### Import the supporting data actions
 
-To enable both the Genesys Cloud Public API call to get the Microsoft Teams userId and the Microsoft Graph API call to update that Teams user's presence, you must import two more data actions.
+Two data actions are required to enable Genesys Cloud Public API to get the Microsoft Teams userId and Microsoft Graph API to update the presence of that Teams user.
+
 * [Import the Find Teams User ID Action](#import-the-find-teams-user-id-data-action "Goes to the Import the Find Teams User ID data action section")
 * [Import the Update Teams User Presence Action](#import-the-update-teams-user-presence-action "Goes to the Import the Update Teams User Presence data action section")
 
 ### Import the Find Teams User ID data action
 
-The Find the Teams User ID data action uses the authenticated token that is supplied by other data actions to get the Microsoft Teams User ID from the Genesys Cloud Public API.
+The Find the Teams User ID data action uses the authenticated token supplied by other data actions to get the Microsoft Teams User ID from the Genesys Cloud Public API.
 
 1. From the [update-ms-teams-user-presence-blueprint repo](https://github.com/GenesysCloudBlueprints/update-ms-teams-user-presence-blueprint) GitHub repository, download the Find-Teams-User-Id-Multiple-externalIds.custom.json file.
 
