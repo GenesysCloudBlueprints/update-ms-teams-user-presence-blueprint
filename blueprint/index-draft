@@ -362,7 +362,7 @@ Once you create the workflows, create the triggers that invoke them. You must ha
 
 4. From the Genesys Cloud Event Orchestration API's folder, select **Genesys Cloud Client Credential Token Creation**. You need to change your API domain to match the AWS region where Genesys Cloud is hosted. The following screenshot shows a Genesys Cloud organization hosted in us-east-1.
 
-5. Click the **Authorization** tab. In the **Username** field, paste the client ID from the [OAuth client that you created](#create-an-oauth-client-for-use-with-the-genesys-cloud-data-action-integration "Goes to the Create an OAuth client for use with the Genesys Cloud data action integration") section. Paste the same OAuth client secret into the **Password** field and click **Send**.
+5. Click the **Authorization** tab. In the **Username** field, paste the client ID from the [OAuth client that you created](#create-an-oauth-client-for-use-with-the-genesys-cloud-data-action-integration "Goes to the Create an OAuth client for use with the Genesys Cloud data action integration section"). Paste the same OAuth client secret into the **Password** field and click **Send**.
 
   ![Create the access token](images/CreateBearerToken.png "Create the access token")
 
