@@ -6,7 +6,7 @@ icon: blueprint
 image: images/OpenScriptDropdown.png
 category: 6
 summary: |
-  This Genesys Cloud Developer Blueprint describes how to setup Genesys Cloud and Microsoft Azure Active Directory. When a Genesys Cloud user's presence is updated, so is is a Genesys Cloud agent's presence in Microsoft Teams.
+  This Genesys Cloud Developer Blueprint describes how to set up Genesys Cloud and Microsoft Azure Active Directory. When a Genesys Cloud user's presence is updated, so is is a Genesys Cloud agent's presence in Microsoft Teams.
 ---
 
 :::{"alert":"primary","title":"About Genesys Cloud Blueprints","autoCollapse":false} 
@@ -17,7 +17,7 @@ For more details on Genesys Cloud blueprint support and practices
 see our Genesys Cloud blueprint [FAQ](https://developer.genesys.cloud/blueprints/faq "Opens the Blueprint FAQ") sheet.
 :::
 
-This Genesys Cloud Developer Blueprint describes how to setup Genesys Cloud and Microsoft Azure Active Directory. When a Genesys Cloud user's presence is updated, so is a Genesys Cloud agent's presence in Microsoft Teams.
+This Genesys Cloud Developer Blueprint describes how to set up Genesys Cloud and Microsoft Azure Active Directory. When a Genesys Cloud user's presence is updated, so is a Genesys Cloud agent's presence in Microsoft Teams.
 
 The Microsoft Graph API call is sent when an Architect workflow receives an inbound user presence change from a Microsoft Teams user associated with the Genesys Cloud agent. The Microsoft Teams user's presence is set to the MS Teams presence value that corresponds to the GC User presence value sent to the Architect workflow.
 
