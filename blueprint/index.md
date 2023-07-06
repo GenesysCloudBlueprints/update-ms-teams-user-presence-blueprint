@@ -1,12 +1,12 @@
 ---
-title: "Update the presence of a Microsoft Teams user based upon an inbound interaction"
+title: "Update the presence of a Microsoft Teams user based upon Genesys Cloud user presence update"
 author: yuri.yeti
 indextype: blueprint
 icon: blueprint
 image: images/OpenScriptDropdown.png
 category: 6
 summary: |
-  This Genesys Cloud Developer Blueprint describes how to set up Genesys Cloud and Microsoft Azure Active Directory. When a Genesys Cloud user's presence is updated, so is is a Genesys Cloud agent's presence in Microsoft Teams.
+  This Genesys Cloud Developer Blueprint describes how to set up Genesys Cloud and Microsoft Azure Active Directory. When a Genesys Cloud user's presence is updated, so is a Genesys Cloud agent's presence in Microsoft Teams.
 ---
 
 :::{"alert":"primary","title":"About Genesys Cloud Blueprints","autoCollapse":false} 
@@ -84,7 +84,7 @@ Register your custom app in Azure to enable Genesys Cloud to authenticate, read,
 
    ![Create the client secret](images/0DCreateClientSecret.png "Create the client secret")
 
-6. Make a copy of the client secret value to use later.
+6. Make a copy of the client's secret value to use later.
 
    :::primary
    **Note:** Client secret values cannot be viewed or retrieved later.
@@ -154,7 +154,7 @@ Add web services data actions integration to Genesys Cloud to communicate with M
 
 ### Import the authentication data action
 
-Genesys Cloud automatically create a **Custom Auth** data action when you add a web services data actions integration in your organization. This authentication data action can be imported into another data action.
+Genesys Cloud automatically creates a **Custom Auth** data action when you add a web services data actions integration in your organization. This authentication data action can be imported into another data action.
 
 1. Navigate to **Admin** > **Integrations** > **Actions** and open the **Custom Auth** data action.
 
